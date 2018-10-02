@@ -381,6 +381,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
 
     if (strcmp(optname, "SO_ERROR") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, SOL_SOCKET, SO_ERROR, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -390,6 +391,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "SO_KEEPALIVE") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, SOL_SOCKET, SO_KEEPALIVE, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -399,6 +401,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "SO_RCVTIMEO") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -408,6 +411,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "SO_REUSEADDR") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -417,6 +421,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "TCP_KEEPALIVE") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, IPPROTO_TCP, TCP_KEEPALIVE, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -426,6 +431,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "TCP_KEEPIDLE") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, IPPROTO_TCP, TCP_KEEPIDLE, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -435,6 +441,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "TCP_KEEPINTVL") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, IPPROTO_TCP, TCP_KEEPINTVL, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
@@ -444,6 +451,7 @@ static uint8_t at_setupCmdCipgetopt(uint8_t para_num)
     }
     else if (strcmp(optname, "TCP_NODELAY") == 0) {
         int optval = 0;
+        size = sizeof(optval);
 
         if (getsockopt(s, IPPROTO_TCP, TCP_NODELAY, (char *)&optval, &size) < 0) {
             return ESP_AT_RESULT_CODE_ERROR;
