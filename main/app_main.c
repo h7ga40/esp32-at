@@ -98,6 +98,7 @@ typedef struct {
 extern uint8_t at_ipMux;
 extern at_linkConType *pLink;
 extern uint8_t at_netconn_max_num;
+extern void esp_at_printf_error_code(esp_err_t err);
 
 static uint8_t at_queryCmdSystime(uint8_t *cmd_name)
 {
@@ -490,14 +491,15 @@ static uint8_t at_setupCmdCipqryhst(uint8_t para_num)
     if (err) {
         if (err == ESP_ERR_NOT_FOUND) {
             snprintf((char*)buffer, sizeof(buffer) - 1, "%s:NOT FOUND\r\n", cmd_name);
+            esp_at_port_write_data(buffer, strlen((char*)buffer));
         }
         else if (err == ESP_ERR_TIMEOUT) {
             snprintf((char*)buffer, sizeof(buffer) - 1, "%s:TIMEOUT\r\n", cmd_name);
+            esp_at_port_write_data(buffer, strlen((char*)buffer));
         }
         else {
-            snprintf((char*)buffer, sizeof(buffer) - 1, "%s:%d\r\n", cmd_name, err);
+            esp_at_printf_error_code(err);
         }
-        esp_at_port_write_data(buffer, strlen((char*)buffer));
 
         return ESP_AT_RESULT_CODE_ERROR;
     }
@@ -525,6 +527,11 @@ void app_main()
 
     nvs_flash_init();
     at_interface_init();
+
+    esp_err_t err = mdns_init();
+    if (err) {
+        printf("mdns init fail\r\n");
+    }
 
     sprintf((char*)version, "compile time:%s %s\r\n", __DATE__, __TIME__);
 #ifdef CONFIG_ESP_AT_FW_VERSION
